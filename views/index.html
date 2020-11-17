@@ -1,188 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-        <title>ReinholdoRökoKök</title>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" type="text/css" href="public/css/Style.css">
-    </head>
-  <main>
-    <h1>Välkommen till Reinholdo Rök & Kök</h1>
-
-<!-- Val av burgare -->
-<body>
-  <h2>Select Burger</h2>
-</body>
-
-<!-- Burgare information samt bild -->
-<section>
-
-<body>
-<table>
-  <thead>
-    <th>Gunner Burger</th>
-    <th>Bönspecial</th>
-  </thead>
-<tbody>
-
-<tr>
-  <td>
-<img src="https://www.visitstockholm.com/globalassets/restauranger/restauranger/flippin-burgers_rectangle.jpg?preset=detail_big_retina"  width="500">
-</td>
-<td>
-  <img src="https://cdn.vox-cdn.com/thumbor/zNhnRBN9dqdS5hZtsawa5KSvWFU=/0x104:960x584/fit-in/1200x600/cdn.vox-cdn.com/uploads/chorus_asset/file/10662591/By_Chloe_burger.jpg" width="500";>
-</td>
-<tr>
-  <td>
-
-  <dl>
-      <dt>Gunners Burgaren</dt>
-      <dd>Dubbelpuck 90g högrev från Bohuslän</dd>
-      <dd> Amerikans chevre (innehåller laktos)</dd>
-      <dd>Isbergssallad från Närke</dd>
-      <dd>Bröd bakade i Uppsala (innehåller gluten)</dd>
-  </dl>
-</td>
-<td>
-  <dl>
-      <dt>Bönspecial</dt>
-      <dd>Bönpuck 150g</dd>
-      <dd> En skiva lokal chevre(Helt utan animalier) </dd>
-      <dd>Isbergssallad från Närke</dd>
-      <dd>Bröd bakade i Uppsala (innehåller inte gluten)</dd>
-  </dl>
-</td>
-</tr>
-
-</tbody>
-</table>
-
-</body>
-</section>
+  <title>Reinholdos_kök</title>
+  <meta charset="utf-8"/>
 
 
-<!-- Priser osv -->
 
 
-<section>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script type="text/javascript" src="js/menu.js" defer></script>
+
+  <script src="https://vuejs.org/js/vue.js" defer></script>
+
+  <script src="js/js_script.js" defer></script>
+  <script src="js/vue_script.js" defer></script>
+
+</head>
 
 <body>
-  <h2>Customer information</h2>
-  <table>
-      <thead>
-          <tr>
-              <th>Övrigt</th>
-              <th>Typ</th>
-              <th>Pris</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td>Paket Blue camel</td>
-            <td>Cigaretter</td>
-            <td>50.00</td>
-        </tr>
-        <tr>
-            <td>Ettan lös</td>
-            <td>Snus</td>
-            <td>45.00</td>
-        </tr>
-          <tr>
+
+  <main id='main'>
+
+    <div id="Top">
+
+      <img id="TopImg" src="https://254foodie.files.wordpress.com/2015/04/burger-sandwich-header.jpg" alt="Header" title="Burger restaurant header">
+      <h1>Welcome to Reinholdos Kök och Tobak </h1>
+
+    </div>
+
+    <div id="Burger_menu_div"> <!-- Välja burgare, menu -->
+
+      <h2>Select burger</h2>
+
+      <p>This is where you execute burger selection</p>
+      <div class = 'BurgerGrid'>
+
+        <div class ='Burger_menu Burger'  v-for='burger in burgers'>
+
+          <h3>  {{burger.name}} </h3>
+
+          <img :src="burger.imgURL">
+
+          <li>{{burger.price}}</li>
+          <li>{{burger.kCal}}</li>
+          <li v-if=burger.lactose>  <span class="alergi">Lactose</span></li>
+          <li v-if=burger.gluten>  <span class="alergi">Gluten</span></li>
+
+          <hr>
+          <input type="checkbox" name="cb" :value=burger.name class="burgerCheckbox">
+          <label for="burger">Add {{burger.name}}</label>
+
+        </div>
+      </div>
+
+
+      <div id="Beer_menu">
+        <table align="center">
+          <thead>
+            <tr>
+              <th>Beer name</th>
+              <th>Type</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
               <td>Samuel Adams Boston Lager</td>
               <td>Lager</td>
               <td>69.00</td>
-          </tr>
-          <tr>
+            </tr>
+            <tr>
               <td>Marble Brewery Earl Grey IPA</td>
               <td>India Pale Ale</td>
               <td>79.00</td>
-          </tr>
-          <tr>
+            </tr>
+            <tr>
               <td>Innis &amp; Gunn Oak Aged</td>
               <td>Ale</td>
               <td>55.00</td>
-          </tr>
-      </tbody>
-  </table>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div id="Customer_information_div"> <!-- Skriv in information o beställ -->
+
+      <div id="info">
+
+        <h2>Customer information</h2>
+
+        <form>
+          <p>
+            <label for="name">Name</label><br>
+            <input type="text" id="fullname" name="fn" required="required" placeholder="First and last name">
+          </p>
+          <p>
+            <label for="email">Email</label><br>
+            <input type="email" id="email" name="em" required="required" placeholder="Email">
+          </p>
+          <p>
+            <label for="PaymentMethod">Choose how to pay:</label><br>
+            <select id="PaymentMethod" name="bm">
+              <option selected="selected" value="Card">Card</option>
+              <option value="Cash in an envelope">Cash in an envelope</option>
+              <option value="Swish">Swish</option>
+              <option value="Paypal">PayPal</option>
+            </select>
+          </p>
+          <p>
+            Gender<br>
+            <input type="radio" id="spelaringenroll" name="gender" value="Man" checked="checked">
+            <label for="Male">Man</label><br>
+
+            <input type="radio" id="oviktigt" name="gender" value="Kvinna">
+            <label for="Female">Woman</label><br>
+
+            <input type="radio" id="vembryrsig" name="gender" value="Icke-binär">
+            <label for="Other">Other</label><br>
+
+          </p>
+        </div>
+
+      </div>
+
+    </form>
+
+<button v-on:click="addOrder" id="OrderButton" type="submit"> Send Order
+</button>
+<br>
+<div v-if="hasordered">
+  <p>Orderbekräftelse</p>
+
+  <p>Kunduppgifter:</p>
+
+  <ul style="list-style-type:none;">
+    <li> Name: {{persinfo[0]}} </li>
+    <li> Email: {{persinfo[1]}} </li>
+    <li> PaymentMethod: {{persinfo[2]}} </li>
+    <li> Gender: {{persinfo[3]}} </li>
+  </ul>
+
+  <p class="bekraftelse">Order:</p>
+
+  <ul v-for="item in array">
+    <li> {{item}} </li>
+  </ul>
+
+</div>
+------------------------------------
+    </div>
+
+
+  </main>
+
+  <hr><!-- Streck -->
+
+  <footer>
+
+    <p> &COPY Jakob Reinholdsson, 2020, STS3 IT</p>
+
+  </footer>
 </body>
-</section>
-
-<!--Bäställning -->
-
-<body>
-
-
-  <h2>Beställ här</h2>
-
-
-</form>
-
-  <section id="contact">
-      <form class="Kontakt" action="index.html" method="post">
-
-
-        <p>
-            <label for="Förnamn">First</label><br>
-            <input type="text" id="Förnamn" name="fn" required="required" placeholder="Förnamn">
-        </p>
-        <p>
-            <label for="Efternamn">Last</label><br>
-            <input type="text" id="Efternamn" name="ln" placeholder="Efternamn">
-        </p>
-        <p>
-          <label for="Email">Email</label><br>
-            <input type="Email" id="Email" name="em" required="required" placeholder="E-mail address">
-        </p>
-        <p>
-            <label for="Adress">Adress</label><br>
-            <input type="Adress" id="Adress" name="em" required="required" placeholder="Adress">
-        </p>
-      </form>
-
-    </body>
-  </section>
-
-
-
-  <section id="Betala">
-
-<body>
-<form class="Betalning" action="index.html" method="post">
-
-<p>
-    <label for="pay">Betalningssätt</label><br>
-    <select id="pay" name="pay">
-        <option>Swish</option>
-        <option>Kort</option>
-        <option>Pengar vid dörren</option>
-    </select>
-</p>
-</form>
-</body>
-</section>
-
-
-<section id="Gender">
-<body>
-  <h2>Välj kön</h2>
-  <form class="Gender" action="index.html" method="post">
-  <input type="radio" id="male" name="gender" value="male">
-<label for="male">Male</label><br>
-<input type="radio" id="female" name="gender" value="female">
-<label for="female">Female</label><br>
-<input type="radio" id="other" name="gender" value="other">
-<label for="other">Other</label>
-</form>
-</body>
-</section>
-
-
-<section id="skicka order">
-  <body>
-<form class="submit" action="index.html" method="post">
-
-  <input type="submit" value="Placera order">
-  </form>
-  </body>
-</section>
-</main>
 </html>

@@ -1,28 +1,28 @@
 var food = [
   {
-  "name": 'Basic Burger',
-  "price": 130,
-  "kCal": 410,
+  "name": 'Gunner Burger',
+  "price": 185,
+  "kCal": 690,
   "lactose": true,
   "gluten": true,
-  "img": "https://hankstruebbq.se/wp-content/uploads/2019/06/Smash_burgers.jpg"
+  "img": "https://www.visitstockholm.com/globalassets/restauranger/restauranger/flippin-burgers_rectangle.jpg?preset=detail_big_retina"
   }
 ,
 {
-"name": 'Veggo Burger',
-"price": 130,
-"kCal": 390,
+"name": 'Bönspecial',
+"price": 150,
+"kCal": 500,
 "lactose": false,
 "gluten": false,
-"img": "https://static01.nyt.com/images/2020/01/22/dining/jo-black-bean-burgers/merlin_167531589_227b9414-ffad-4b44-ae53-67483bd2bae5-articleLarge.jpg"
+"img": "https://cdn.vox-cdn.com/thumbor/zNhnRBN9dqdS5hZtsawa5KSvWFU=/0x104:960x584/fit-in/1200x600/cdn.vox-cdn.com/uploads/chorus_asset/file/10662591/By_Chloe_burger.jpg"
 }
 ,
 {
-"name": 'BBQ Burger',
-"price": 160,
-"kCal": 590,
-"lactose": true,
-"gluten": true,
-"img": "https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg"
+"name": 'SuperBurgaren',
+"price": 399,
+"kCal": 0,
+"lactose": false,
+"gluten": false,
+"img": "https://www.korvbrodsbagarn.se/siteassets/receptbilder/blackburger_receptbild_1170x790px.jpg?maxwidth=600&maxheight=600"
 }
 ]
