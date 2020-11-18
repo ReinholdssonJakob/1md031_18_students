@@ -1,3 +1,6 @@
+'use strict';
+var socket = io();
+
 var BurgerMenu = new Vue({
   el: '#Burger_menu_div',
   data: {
@@ -13,30 +16,51 @@ var BurgerMenu = new Vue({
 var Info = new Vue({
   el: '#main',
   data: {
-    name      : '',
-    email     : '',
-    street    : '',
-    house     : '',
-    Payment   : 'Swish',
-    picked    : '',
-
     persinfo: [],
     array: [],
-
+    orders: {},
+    ordernr: 0,
     bestallt: "",
-
     hasordered: false,
-
-    isOpen: false
+    location: [],
   },
   methods:{
-      toggle: function(){
-          this.isOpen = !this.isOpen
-      },
-  addOrder: function(event) {
-      this.persinfo = valueArray();
+
+    getNext: function() {
+      this.ordernr += 1;
+      return this.ordernr;
+
+    },
+
+    addOrder: function(event) {
+      var location = this.orders.T.details;
       this.array = orderArray();
+      this.persinfo = valueArray();
       this.hasordered = true;
-  }
-}
-})
+      this.location = this.orders.T.details;
+
+      socket.emit("addOrder", {
+        orderId: this.getNext(),
+        details: location,
+        orderItems: this.array,
+        persinformation: this.persinfo,
+      });
+    },
+
+    displayOrder: function(event) {
+      var location = {
+        x: event.currentTarget.getBoundingClientRect().left,
+        y: event.currentTarget.getBoundingClientRect().top
+      };
+
+      this.orders = {
+        "T": {
+          details: {
+            x: event.clientX - 10 - location.x,
+            y: event.clientY - 10 - location.y
+          }}
+        }
+
+      }
+    }
+  })

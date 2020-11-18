@@ -2,20 +2,18 @@
 <html lang="en">
 
 <head>
-  <title>Reinholdos_kök</title>
+  <title>Reinholdos_Kök_Tobak</title>
   <meta charset="utf-8"/>
 
-
-
+  <!-- C:\Users\Admin\github\1md031_18_students sen cmd node app.js -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script type="text/javascript" src="js/menu.js"></script>
+  <script src="js/js_script.js"></script>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script src="js/vue_script.js" defer></script>
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
-
-  <script type="text/javascript" src="js/menu.js" defer></script>
-
-  <script src="https://vuejs.org/js/vue.js" defer></script>
-
-  <script src="js/js_script.js" defer></script>
-  <script src="js/vue_script.js" defer></script>
 
 </head>
 
@@ -30,7 +28,7 @@
 
     </div>
 
-    <div id="Burger_menu_div"> <!-- Välja burgare, menu -->
+    <div id="Burger_menu_div"> <!-- Välja burgare -->
 
       <h2>Select burger</h2>
 
@@ -45,8 +43,8 @@
 
           <li>{{burger.price}}</li>
           <li>{{burger.kCal}}</li>
-          <li v-if=burger.lactose>  <span class="alergi">Lactose</span></li>
-          <li v-if=burger.gluten>  <span class="alergi">Gluten</span></li>
+          <li v-if=burger.lactose>  <span class="allergi">Lactose</span></li>
+          <li v-if=burger.gluten>  <span class="allergi">Gluten</span></li>
 
           <hr>
           <input type="checkbox" name="cb" :value=burger.name class="burgerCheckbox">
@@ -87,7 +85,7 @@
 
     </div>
 
-    <div id="Customer_information_div"> <!-- Skriv in information o beställ -->
+    <div id="Customer_information"> <!-- Skriv in information o beställ -->
 
       <div id="info">
 
@@ -119,50 +117,61 @@
             <input type="radio" id="oviktigt" name="gender" value="Kvinna">
             <label for="Female">Woman</label><br>
 
-            <input type="radio" id="vembryrsig" name="gender" value="Icke-binär">
+            <input type="radio" id="vembryrsig" name="gender" value="Other">
             <label for="Other">Other</label><br>
 
           </p>
         </div>
+      </form>
+    </div>
 
+    <div id='map'>
+      <h1> Click in the map! </h1>
+      <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+      <div class="view-box">
+        <div id="dots" v-on:click="displayOrder">
+          <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+            {{key}}
+          </div>
+        </div>
       </div>
-
-    </form>
-
-<button v-on:click="addOrder" id="OrderButton" type="submit"> Send Order
-</button>
-<br>
-<div v-if="hasordered">
-  <p>Orderbekräftelse</p>
-
-  <p>Kunduppgifter:</p>
-
-  <ul style="list-style-type:none;">
-    <li> Name: {{persinfo[0]}} </li>
-    <li> Email: {{persinfo[1]}} </li>
-    <li> PaymentMethod: {{persinfo[2]}} </li>
-    <li> Gender: {{persinfo[3]}} </li>
-  </ul>
-
-  <p class="bekraftelse">Order:</p>
-
-  <ul v-for="item in array">
-    <li> {{item}} </li>
-  </ul>
-
-</div>
-------------------------------------
     </div>
 
 
-  </main>
+  <button v-on:click="addOrder" id="OrderButton" type="submit"> Send Order
+  </button>
+  <br>
+  <div v-if="hasordered">
+    <h1>Order Confirmation</h1>
 
-  <hr><!-- Streck -->
+    <h2>Customer Information:</h2>
 
-  <footer>
+    <ul style="list-style-type:none;">
+      <li> Name: {{persinfo[0]}} </li>
+      <li> Email: {{persinfo[1]}} </li>
+      <li> PaymentMethod: {{persinfo[2]}} </li>
+      <li> Gender: {{persinfo[3]}} </li>
+      <li> Deliver to: {{location}}</li>
+    </ul>
 
-    <p> &COPY Jakob Reinholdsson, 2020, STS3 IT</p>
+    <h2>Order:</h2>
 
-  </footer>
+    <ul v-for="item in array">
+      <li> {{item}} </li>
+    </ul>
+
+  </div>
+</div>
+
+
+</main>
+
+<hr>
+
+<footer>
+
+  <p> &COPY Jakob Reinholdsson, 2020, STS3 IT</p>
+
+</footer>
 </body>
 </html>
