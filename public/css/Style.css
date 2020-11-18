@@ -64,13 +64,14 @@ body {
 
 }
 #Beer_menu table{
-  padding: 5pt;
+  padding: 10pt;
   border-style: dashed;
 }
-
-#Beer_menu th, td{
-  padding: 5pt;
+#Beer_menu {
+  text-align: center;
 }
+
+
 
 #Customer_information{
   padding: 50pt;
